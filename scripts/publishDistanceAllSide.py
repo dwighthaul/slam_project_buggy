@@ -68,7 +68,7 @@ class GetMeanDirection():
         
     def main(self):
 
-        pub = rospy.Publisher('publ_mean_all_value', AllSidesDistance, queue_size=10)
+        pub = rospy.Publisher('allMeanValues', AllSidesDistance, queue_size=10)
 
         rospy.Subscriber("scan", LaserScan, self.callback)
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
     side = "front"
 
-    if len(sys.argv) > 1 and sys.argv[1] in list_directions:
+    if len(sys.argv) > 1 and sys.argv[1] in list_sides:
         side= sys.argv[1]
 
     try:

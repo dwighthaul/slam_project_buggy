@@ -7,7 +7,7 @@ from sensor_msgs.msg import LaserScan
 from slam_project_buggy.msg import LaserMsgDistance
 
 
-
+side = "front"
 default_value_distance = -1
 list_directions = ["front", "left", "back", "right"]
 
@@ -24,7 +24,11 @@ class GetMeanDirection():
     mean_value = 0
 
 
-    def __init__(self, side ="front"):
+    def __init__(self):
+
+
+        print(side)
+
         rospy.init_node('main', anonymous=True)
 
         self.side_lidar = side
@@ -94,14 +98,15 @@ class GetMeanDirection():
 
 if __name__ == '__main__':
 
-    side = "front"
 
-    if len(sys.argv) > 1 and sys.argv[1] in list_directions:
-        side= sys.argv[1]
+    g = GetMeanDirection()
 
-    try:
-        g = GetMeanDirection(side)
-        g.main()
+    # if len(sys.argv) > 1 and sys.argv[1] in list_directions:
+    #     side= sys.argv[1]
 
-    except rospy.ROSInterruptException:
-        pass
+    # try:
+    #     g = GetMeanDirection(side)
+    #     g.main()
+
+    # except rospy.ROSInterruptException:
+    #     pass

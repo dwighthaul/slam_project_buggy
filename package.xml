@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="2.0"?>
 <package>
   <name>slam_project_buggy</name>
-  <version>0.0.0</version>
+  <version>0.1.0</version>
   <description>The slam_project_buggy package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
@@ -47,10 +47,19 @@
   <build_depend>learning_tf</build_depend>
   <build_depend>turtlesim</build_depend>
 
-
   <!--   if you create a costum message need this 2 lignes -->
   <build_depend>message_generation</build_depend>
   <run_depend>message_runtime</run_depend>
+
+  <!--   if you create a costum action you need this 4 lignes -->
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>actionlib</build_depend>
+  <run_depend>actionlib</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+  <run_depend>message_generation</run_depend>
+
+  <!-- To be able to modyfy the data while launching a file -->
+  <!-- <run_depend>dynamic_reconfigure</run_depend> -->
 
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
@@ -58,6 +67,8 @@
   <run_depend>tf</run_depend>
   <run_depend>learning_tf</run_depend>
   <run_depend>turtlesim</run_depend>
+  
+
 
 
   <!-- The export tag contains other, unspecified, tags -->
