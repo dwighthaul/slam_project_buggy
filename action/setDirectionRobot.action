@@ -1,0 +1,11 @@
+# Define the goal
+string direction
+int16 angle
+string side
+bool backToPrevious
+---
+# Define the result
+bool done
+---
+# Define a feedback message
+bool in_progress 
