@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 
-<!-- Copided from rplidar_ros/view_rplidar -->
-
 <launch>
 
 <!-- If this parameter is not set to false the scan will "add" each scan along the time -->
@@ -9,11 +7,11 @@
 
 	<!-- Includes -->
 
-		<!-- Start the RPLidar -->
-		<include file="$(find rplidar_ros)/launch/rplidar.launch" />
+	<!-- Start the RPLidar -->
+	<include file="$(find rplidar_ros)/launch/rplidar.launch" />
 
-		<!-- Call the main file that call the Hector package -->
-		<include file="$(find slam_project_buggy)/launch/slam.launch"/>
+	<!-- Call the main file that call the Hector package -->
+	<include file="$(find slam_project_buggy)/launch/slam.launch"/>
 
 
 <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster"  args="0 0 0 0 0 0 /base_link /laser 100" />  
