@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 
-<!-- Copided from rplidar_ros/view_rplidar -->
-
 <launch>
 
 	<include file="$(find slam_project_buggy)/launch/custom_launch.launch" />
