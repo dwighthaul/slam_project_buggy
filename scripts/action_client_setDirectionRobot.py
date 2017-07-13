@@ -34,30 +34,19 @@ class clientSetDirectionRobot():
         # queue_size=1 to avoid stacking of the calls
         rospy.Subscriber("allMeanValues", AllSidesDistance, self.setDirection_cb, queue_size=1)
         rospy.loginfo('Init Client')
-        self.client = SimpleActionClient('set_direction', setDirectionRobotAction)
+        self.client = SimpleActionClient('speed_from_action', setDirectionRobotAction)
 
-        # Waits until the action server has started up and started
-        # listening for goals.
-        # rospy.loginfo("Connect to server")
         self.client.wait_for_server()
 
 
 
     def sendDirection(self, action):
 
-
-        # Creates a goal to send to the action server.
-
-        # # Sends the goal to the action server.
-        # rospy.loginfo("Send the given goal")
         self.client.send_goal(action)
 
-        # # Waits for the server to finish performing the action.
         self.client.wait_for_result()
 
-        # # Prints out the result of executing the action
-        # rospy.loginfo("Get the results")
-        retour = self.client.get_result()  # A FibonacciResult
+        retour = self.client.get_result()
 
         return retour
 
@@ -74,6 +63,7 @@ class clientSetDirectionRobot():
     def setDirection_cb(self, data):
 
         if self.ready_to_send:
+
             try:
 
                 front = data.listDistances[0].distance
@@ -83,36 +73,42 @@ class clientSetDirectionRobot():
                 rospy.loginfo('\nF: %.2f \nR: %.2f \nL: %.2f \nB: %.2f', front, right, left, back)
 
 
-
                 action_set = False
 
-
+                angle_r= 0
+                side_r=""
+                backToPrevious_r = True
+                direction_r = ""
 
                 if front < limit_distance and front != -1 :
 
                     if back < limit_distance and back != -1 :
                         action_set = True
-                        action = setDirectionRobotGoal(direction = "stop", angle= 0, side="", backToPrevious=True)
-
+                        direction = "stop"
 
 
                     elif right > limit_distance and left > limit_distance:
                         action_set = True
-                        action = setDirectionRobotGoal(direction = "backward", angle= 0, side="", backToPrevious=True)
+                        direction_r = "backward"
+
 
 
                     elif right < limit_distance and right != -1 :
                         action_set = True
-                        action = setDirectionRobotGoal(direction = "rotate", angle= 90, side="left", backToPrevious=True)
+                        direction_r = "rotate"
+                        angle_r = 90
+                        side_r ="left"
 
                     elif left < limit_distance and left != -1 :
                         action_set = True
-                        action = setDirectionRobotGoal(direction = "rotate", angle= 90, side="right", backToPrevious=True)
+                        direction_r = "rotate"
+                        angle_r = 90
+                        side_r ="right"
 
 
                 elif back < limit_distance and back != -1 :
                     action_set = True
-                    action = setDirectionRobotGoal(direction = "forward", angle= 0, side="", backToPrevious=True)
+                    direction_r = "forward"
 
 
 
@@ -120,6 +116,7 @@ class clientSetDirectionRobot():
 
                 if action_set:
                     self.ready_to_send = False
+                    action = setDirectionRobotGoal(direction = direction_r, angle=angle_r, side=side_r, backToPrevious=backToPrevious_r)
                     rospy.loginfo('Call the server, send action: %s %s', action.direction, action.side)
 
 
