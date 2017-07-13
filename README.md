@@ -19,10 +19,10 @@ Look at the custom_launch.launch
 Comment/Remove the slam.launch include
 
 Start:
-  runcore
-  runlaunch slam_project_buggy custom_launch.launch
+	runcore
+	runlaunch slam_project_buggy custom_launch.launch
 So save the bag, in an other terminal
-  rosbag record scan tf
+	rosbag record scan tf
 
 
 2. 
@@ -40,20 +40,20 @@ Comment the tdf node and the include of the rplidar launch file
 
 5.
 Launch the custom_launch file:
-  runlaunch slam_project_buggy slam_project_buggy.launch
+	runlaunch slam_project_buggy slam_project_buggy.launch
 Or 
-  runlaunch slam_project_buggy custom_launch.launch
+	runlaunch slam_project_buggy custom_launch.launch
 To see the map in the rviz windows
 
 Play the bag:
-  rosbag play "name_of_your_bag.bag>
+	rosbag play "name_of_your_bag.bag>
 Wait for it to finish
 
 If you run the rviz you should see the map creation
 
 6.
 Save the map:
-  rosrun map_server map_saver "Mapname"
+	rosrun map_server map_saver "Mapname"
 
 
 I use this method to create the bag in: data/final_data/2017-07-13-17-38-19.bag
@@ -62,11 +62,11 @@ I use this method to create the bag in: data/final_data/2017-07-13-17-38-19.bag
 ## -> All in once:
 
 1.
-To create a map you need to launch the 
-  slam_project_buggy.launch
-file to see it in the rviz windows.
+To create a map you need to launch: 
+	roslaunch slam_project_buggy slam_project_buggy.launch
+To see it in the rviz windows.
 Or if you don't want to see the map in the rviz windows you can launch the 
-  custom_launch.launch
+	roslaunch slam_project_buggy custom_launch.launch
 file.
 
 2. 
@@ -74,7 +74,7 @@ Move your RPLidar around.
 
 3.
 Save the map:
-  rosrun map_server map_saver "Mapname"
+	rosrun map_server map_saver "Mapname"
 
 
 ##links
