@@ -2,7 +2,7 @@
 string direction
 int16 angle
 string side
-bool backToPrevious
+bool stopWheels
 ---
 # Define the result
 bool done
