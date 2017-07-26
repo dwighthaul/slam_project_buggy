@@ -52,6 +52,10 @@ generate_messages(
 catkin_package(
 )
 
+
+#add_library(global_planner_lib src/createPath.cpp)
+
+
 ###########
 ## Build ##
 ###########
@@ -64,3 +68,7 @@ include_directories(
 )
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+
+add_executable(makeMap src/makeMap.cpp)
+target_link_libraries(makeMap ${catkin_LIBRARIES})
+add_dependencies(makeMap slam_project_buggy_generate_messages_cpp)

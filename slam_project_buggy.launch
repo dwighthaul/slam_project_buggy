@@ -5,6 +5,6 @@
 	<include file="$(find slam_project_buggy)/launch/custom_launch.launch" />
 
 
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam_project_buggy)/rviz/rplidar.rviz"></node>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam_project_buggy)/rviz/test.rviz"></node>
 
 </launch>

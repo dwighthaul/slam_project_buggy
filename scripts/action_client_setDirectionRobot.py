@@ -14,7 +14,7 @@ from actionlib import SimpleActionClient
 
 
 
-limit_distance = 0.3
+limit_distance = 1
 list_sides = ["front", "left", "back", "right"]
 
 class clientSetDirectionRobot():
