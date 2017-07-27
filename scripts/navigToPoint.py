@@ -162,14 +162,14 @@ class navigToPoint():
 
         if angle > 10:
             print("rotate " + ("right" if isright else "left"))
-            # self.rotate(angle, isright)
+            self.rotate(angle, isright)
 
         elif dist > 0.5:
             print("front")
-            # self.goforward()
+            self.goforward()
         else:
             print("stop")
-            # self.stop()
+            self.stop()
 
 
     def goforward(self):
