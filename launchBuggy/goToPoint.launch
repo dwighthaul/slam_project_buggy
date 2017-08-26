@@ -2,9 +2,10 @@
 
 <launch>
 
-	<node name="navigToPoint" pkg="slam_project_buggy" type="navigToPoint.py"/>
+	<node name="navigToPoint" pkg="slam_project_buggy" type="navigToPoint.py" output="screen"/>
 
 	<!-- <node name="createPath" pkg="slam_project_buggy" type="createPath.py"/> -->
+
 
 
 

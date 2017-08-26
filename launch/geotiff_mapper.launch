@@ -15,4 +15,4 @@
     <param name="draw_free_space_grid" type="bool" value="true" />
   </node>
  
- </launch>
+</launch>

@@ -5,8 +5,13 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  geometry_msgs
+  message_generation
   tf
   turtlesim
+  genmsg 
+  actionlib_msgs 
+  actionlib
 )
 
 
@@ -17,16 +22,10 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate messages in the 'msg' folder
 add_message_files(
-   FILES
-   LaserMsgDistance.msg
-   AllSidesDistance.msg
-)
-
-find_package(
-  catkin REQUIRED 
-  genmsg 
-  actionlib_msgs 
-  actionlib
+  FILES
+  ListPoints.msg
+  LaserMsgDistance.msg
+  AllSidesDistance.msg
 )
 
 
@@ -47,13 +46,13 @@ generate_messages(
   DEPENDENCIES
   std_msgs
   actionlib_msgs
+  geometry_msgs
 )
 
 catkin_package(
+  CATKIN_DEPENDS message_runtime
 )
 
-
-#add_library(global_planner_lib src/createPath.cpp)
 
 
 ###########
@@ -66,9 +65,23 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
-include_directories(include ${catkin_INCLUDE_DIRS})
+add_library(global_planner_lib src/global_planner.cpp)
 
 
-add_executable(makeMap src/makeMap.cpp)
-target_link_libraries(makeMap ${catkin_LIBRARIES})
-add_dependencies(makeMap slam_project_buggy_generate_messages_cpp)
+#Include PCL for the globa_planner
+find_package(PCL 1.3 REQUIRED)
+
+include_directories(
+  include ${catkin_INCLUDE_DIRS}
+  include ${PCL_INCLUDE_DIRS}
+)
+
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+
+
+# add_executable(makeMap src/makeMap.cpp)
+# target_link_libraries(makeMap ${catkin_LIBRARIES})
+# add_dependencies(makeMap slam_project_buggy_generate_messages_cpp)
+

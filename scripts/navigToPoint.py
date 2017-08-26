@@ -53,7 +53,7 @@ class navigToPoint():
     def __init__(self):
         rospy.init_node('navig_to_point', anonymous=True)
 
-        rospy.Subscriber("clicked_point", PointStamped, self.callback_save_point_clicked)
+        rospy.Subscriber("target_position", PointStamped, self.callback_save_point_clicked)
         rospy.Subscriber("slam_out_pose", PoseStamped, self.callback_save_point_robot)
 
         self.pubPolygon = rospy.Publisher('angleRepresentation', PolygonStamped, queue_size=10)
@@ -67,14 +67,12 @@ class navigToPoint():
 
 
         rospy.loginfo("Looking for a sever")
-        # self.client.wait_for_server()
+        self.client.wait_for_server()
         rospy.loginfo("Server found")
-
-        self.main()
 
 
     def callback_save_point_clicked(self, data):
-        print(data)
+        print("Point Selected")
         self.doesPointSelected = True
         self.pointSelected = data.point
 
@@ -159,22 +157,30 @@ class navigToPoint():
 
 
     def updateDirection(self, angle, dist, isright):
-
         if angle > 10:
-            print("rotate " + ("right" if isright else "left"))
+            print("A: " + str(angle))
+            # print("rotate " + ("right" if isright else "left"))
             self.rotate(angle, isright)
 
-        elif dist > 0.5:
-            print("front")
+        elif dist > 0.2:
+            # print("front")
+            print("D: " + str(dist))
             self.goforward()
         else:
+            self.doesPointSelected = True
+
             print("stop")
             self.stop()
+            return True
+
+
+
+        return False
 
 
     def goforward(self):
 
-        action = setDirectionRobotGoal(direction = "forward", angle=0, side="", publishToArduino=True, backToPrevious=False)
+        action = setDirectionRobotGoal(direction = "forward", angle=0, side="",stopWheels = False)
 
         self.client.send_goal(action)
         self.client.wait_for_result()
@@ -187,17 +193,16 @@ class navigToPoint():
     def rotate(self, angle, isright):
         a_side = "right" if isright else "left"
 
-        action = setDirectionRobotGoal(direction = "rotate", angle=0, side=a_side, publishToArduino=True, backToPrevious=False)
+        action = setDirectionRobotGoal(direction = "rotate", angle=0, side=a_side, stopWheels = False)
 
         self.client.send_goal(action)
         self.client.wait_for_result()
 
         retour = self.client.get_result()
-        # print('rotate')
 
     def stop(self):
 
-        action = setDirectionRobotGoal(direction = "stop", angle=0, side="", publishToArduino=True, backToPrevious=False)
+        action = setDirectionRobotGoal(direction = "stop", angle=0, side="", stopWheels=False)
 
         self.client.send_goal(action)
         self.client.wait_for_result()
@@ -225,9 +230,9 @@ class navigToPoint():
 
                 [dist, angle, isright] = self.publishMarkers()
 
-                # print(angle)
+                if self.updateDirection(angle, dist, isright):
+                    return
 
-                self.updateDirection(angle, dist, isright)
 
 
             # self.pub.publish(dist)
@@ -240,6 +245,7 @@ if __name__ == '__main__':
     try:
 
         g = navigToPoint()
+        g.main()
 
 
     except rospy.ROSInterruptException:

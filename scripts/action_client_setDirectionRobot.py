@@ -77,7 +77,7 @@ class clientSetDirectionRobot():
 
                 angle_r= 0
                 side_r=""
-                backToPrevious_r = True
+                stopWheels_r = True
                 direction_r = ""
 
                 if front < limit_distance and front != -1 :
@@ -99,6 +99,7 @@ class clientSetDirectionRobot():
                         angle_r = 90
                         side_r ="left"
 
+
                     elif left < limit_distance and left != -1 :
                         action_set = True
                         direction_r = "rotate"
@@ -111,12 +112,9 @@ class clientSetDirectionRobot():
                     direction_r = "forward"
 
 
-
-
-
                 if action_set:
                     self.ready_to_send = False
-                    action = setDirectionRobotGoal(direction = direction_r, angle=angle_r, side=side_r, backToPrevious=backToPrevious_r)
+                    action = setDirectionRobotGoal(direction = direction_r, angle=angle_r, side=side_r, stopWheels=stopWheels_r)
                     rospy.loginfo('Call the server, send action: %s %s', action.direction, action.side)
 
 

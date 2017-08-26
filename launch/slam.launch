@@ -4,8 +4,8 @@
 
 	<include file="$(find slam_project_buggy)/launch/hector_mapping.launch"/>
 
-	<!-- <include file="$(find slam_project_buggy)/launch/geotiff_mapper.launch"/> -->
-
 	<include file="$(find slam_project_buggy)/launch/path_mapping.launch"/>
+
+	<include file="$(find slam_project_buggy)/launch/geotiff_mapper.launch"/>
 
 </launch>

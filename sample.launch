@@ -10,7 +10,6 @@
 
 	<node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node"  args="" >
 		<param name="fixed_frame" value="map" type="str" />
-
 	</node>
 
 	<node pkg="map_server" type="map_server" name="map_server"  args="$(find slam_project_buggy)/data/final_data/my_house/my_map.yaml" />
