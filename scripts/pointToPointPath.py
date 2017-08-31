@@ -74,16 +74,18 @@ class pointToPointPath():
 
 
     def cb_get_final_point(self, data):
-        if self.mapIsSet and self.robot_positionIsSet:
-            ListPointStamped = self.createMarker(0.012, 0.012, 0.039, "/map", Marker.LINE_STRIP)
 
+
+        if self.mapIsSet and self.robot_positionIsSet:
+            costmap = self.map
+            ListPointStamped = self.createMarker(0.012, 0.012, 0.039, "/map", Marker.LINE_STRIP)
             ListPointStamped.points = []
             print(ListPointStamped.points)
             self.path_points_marker.publish(ListPointStamped)
 
 
             rospy.loginfo("Target point selected")
-            resolution = self.map.info.resolution
+            resolution = costmap.info.resolution
             self.pointSelected = data.point
 
             GoalPointStamped = self.createMarker(0.886, 0.886, 0.984, "/map", Marker.SPHERE)
@@ -95,8 +97,8 @@ class pointToPointPath():
 
             g_point = rosPoint(gx, gy, 0)
 
-            width = self.map.info.width
-            height = self.map.info.height
+            width = costmap.info.width
+            height = costmap.info.height
 
             deltaWidth = width/2
             deltaHeight = height/2
@@ -113,7 +115,7 @@ class pointToPointPath():
             start = Point(int(deltaWidth + convert * self.robot_position.pose.position.y), int(deltaHeight + convert * self.robot_position.pose.position.x))
             goal = Point(int(deltaWidth + (gy * convert)), int(deltaHeight + (gx * convert)))
 
-            listPoint = self.createPath(start, goal)
+            listPoint = self.createPath(costmap, start, goal)
 
             self.path_points.publish(listPoint)
 
@@ -121,12 +123,12 @@ class pointToPointPath():
             rospy.loginfo("The map has not been publish yet")
 
 
-    def createPath(self, start, goal):
+    def createPath(self, costmap, start, goal):
         rospy.loginfo("Creating Path")
 
-        width = self.map.info.width
-        height = self.map.info.height
-        resolution = self.map.info.resolution
+        width = costmap.info.width
+        height = costmap.info.height
+        resolution = costmap.info.resolution
 
         deltaWidth = width/2
         deltaHeight = height/2
@@ -144,8 +146,8 @@ class pointToPointPath():
 
         # create list id wall
         wallList = []
-        for t in xrange(len(self.map.data)):
-            if self.map.data[t] > self.threshold:
+        for t in xrange(len(costmap.data)):
+            if costmap.data[t] > self.threshold:
                 wallList.append(t)
 
         # print(wallList)
@@ -158,11 +160,9 @@ class pointToPointPath():
         createPath = PathCreator(grid, start, goal, height, width)
         rospy.loginfo("Time initiate the PathCreator (seconds): " + str(time.time()-t1) )
 
-
         t2 = time.time()
         createPath.fillWalls(wallList)
         rospy.loginfo("Time to fill the walls (seconds): " + str(time.time()-t2) )
-
 
         t3 = time.time()
         listPoint = createPath.main()

@@ -65,6 +65,7 @@ class navigToPoint():
         # Action to send 
         self.client = SimpleActionClient('speed_from_action', setDirectionRobotAction)
 
+        self.direction = ""
 
         rospy.loginfo("Looking for a sever")
         self.client.wait_for_server()
@@ -157,16 +158,24 @@ class navigToPoint():
 
 
     def updateDirection(self, angle, dist, isright):
+
+
+
         if angle > 10:
-            print("A: " + str(angle))
-            # print("rotate " + ("right" if isright else "left"))
-            self.rotate(angle, isright)
+            if self.direction != "rotate":
+                self.direction = "rotate"
+                print("A: " + str(angle))
+                self.rotate(angle, isright)
 
         elif dist > 0.2:
-            # print("front")
-            print("D: " + str(dist))
-            self.goforward()
+            if self.direction != "front":
+                self.direction = "front"
+                print("D: " + str(dist))
+
+                self.goforward()
         else:
+            self.direction =""
+
             self.doesPointSelected = True
 
             print("stop")
