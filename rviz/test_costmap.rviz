@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Goal1
         - /PathToTake1
       Splitter Ratio: 0.5
     Tree Height: 728
@@ -66,7 +65,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 39
+      Max Intensity: 36
       Min Color: 0; 0; 0
       Min Intensity: 9
       Name: LaserScan
@@ -127,14 +126,6 @@ Visualization Manager:
       Class: rviz/Polygon
       Color: 25; 255; 0
       Enabled: true
-      Name: Polygon
-      Topic: /angleRepresentation
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Class: rviz/Polygon
-      Color: 25; 255; 0
-      Enabled: true
       Name: Angle
       Topic: /angleRepresentation
       Unreliable: false
@@ -144,7 +135,7 @@ Visualization Manager:
       Axes Radius: 0.100000001
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.300000012
       Head Radius: 0.100000001
       Name: ArrowDir
@@ -153,13 +144,13 @@ Visualization Manager:
       Shape: Arrow
       Topic: /slam_out_pose
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /start_point_marker
       Name: Start
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -167,7 +158,7 @@ Visualization Manager:
       Marker Topic: /goal_position_marker
       Name: Goal
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -175,9 +166,32 @@ Visualization Manager:
       Marker Topic: /path_points_marker
       Name: PathToTake
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: false
+      Head Diameter: 0.300000012
+      Head Length: 0.200000003
+      Length: 0.300000012
+      Line Style: Lines
+      Line Width: 0.0299999993
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.0299999993
+      Shaft Diameter: 0.100000001
+      Shaft Length: 0.100000001
+      Topic: /trajectory
+      Unreliable: false
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -205,24 +219,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.12748337
+      Distance: 5.57191038
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.72571242
-        Y: 2.98240066
-        Z: 0.164225623
+        X: 0.918513417
+        Y: -0.663232148
+        Z: 0.150885507
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
+      Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.55479634
+      Pitch: 1.54979634
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.13539553
+      Yaw: 3.15039372
     Saved: ~
 Window Geometry:
   Displays:
