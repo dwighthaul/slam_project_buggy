@@ -40,7 +40,7 @@ class pointToPointPath():
 
     vectorRobotToPointselected = Vector3()
 
-    threshold = 75
+    threshold = 10
 
     def __init__(self):
         rospy.init_node('navig_to_end_point', anonymous=True)
@@ -107,6 +107,7 @@ class pointToPointPath():
 
             self.robot_position.pose.position
 
+            convert = resolution
             convert = 50 / 2.5
 
             start = Point(int(deltaWidth + convert * self.robot_position.pose.position.y), int(deltaHeight + convert * self.robot_position.pose.position.x))
@@ -144,7 +145,7 @@ class pointToPointPath():
         # create list id wall
         wallList = []
         for t in xrange(len(self.map.data)):
-            if self.map.data[t] > 30:
+            if self.map.data[t] > self.threshold:
                 wallList.append(t)
 
         # print(wallList)
@@ -153,14 +154,19 @@ class pointToPointPath():
 
 
 
-
+        t1 = time.time()
         createPath = PathCreator(grid, start, goal, height, width)
+        rospy.loginfo("Time initiate the PathCreator (seconds): " + str(time.time()-t1) )
 
+
+        t2 = time.time()
         createPath.fillWalls(wallList)
+        rospy.loginfo("Time to fill the walls (seconds): " + str(time.time()-t2) )
 
-        t = time.time()
+
+        t3 = time.time()
         listPoint = createPath.main()
-        rospy.loginfo("Time to generate the route (seconds): " + str(time.time()-t) )
+        rospy.loginfo("Time to generate the route (seconds): " + str(time.time()-t3) )
 
 
         StartPointStamped = self.createMarker(0.039, 0.031, 0.129, "/map", Marker.SPHERE)

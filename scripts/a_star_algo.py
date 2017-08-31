@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from heapq import heappush, heappop # for priority queue
+from heapq import heappush, heappop
 import math
 import time
 
@@ -24,10 +24,10 @@ class RandomPoint(Point):
 
 
 class node:
-    xPos = 0 # x position
-    yPos = 0 # y position
-    distance = 0 # total distance already travelled to reach the node
-    priority = 0 # priority = distance + remaining distance estimate
+    xPos = 0
+    yPos = 0
+    distance = 0
+    priority = 0
     def __init__(self, xPos, yPos, distance, priority):
         self.xPos = xPos
         self.yPos = yPos
@@ -72,19 +72,21 @@ class PathCreator(object):
             open_nodes_map.append(list(row))
             dir_map.append(list(row))
 
-        pq = [[], []] # priority queues of open (not-yet-tried) nodes
-        pqi = 0 # priority queue index
-        # create the start node and push into list of open nodes
+        pq = [[], []]
+        pqi = 0
+
         n0 = node(self.start.x, self.start.y, 0, 0)
         n0.updatePriority(self.goal.x, self.goal.y)
         heappush(pq[pqi], n0)
-        open_nodes_map[self.start.y][self.start.x] = n0.priority # mark it on the open nodes map
+        open_nodes_map[self.start.y][self.start.x] = n0.priority
 
-        # A* search
+        # Implementation of the algorith
         while len(pq[pqi]) > 0:
 
-            n1 = pq[pqi][0] # top node
+            n1 = pq[pqi][0]
             n0 = node(n1.xPos, n1.yPos, n1.distance, n1.priority)
+
+            # start with the start position (postion of the robot)
             x = n0.xPos
             y = n0.yPos
             heappop(pq[pqi])
@@ -144,13 +146,26 @@ class PathCreator(object):
 
     def fillWalls(self, wallList):
 
-        indice = 0
 
-        for x in range(self.height):
-            for y in range(self.width):
-                if indice in wallList:
-                    self.map[y][x] = wallValue
-                indice = indice +1
+        # for i in range(len(wallList)):
+
+        #     print(str(wallList[i]) + ",")
+
+
+        for i in range(len(wallList)):
+
+            x = wallList[i] / self.height
+            y = wallList[i] % self.width
+
+            self.map[y][x] = wallValue
+
+
+        # indice = 0
+        # for x in range(self.height):
+        #     for y in range(self.width):
+        #         if indice in wallList:
+        #             self.map[y][x] = wallValue
+        #         indice = indice +1
 
 
 
