@@ -9,7 +9,7 @@
     <param name="base_frame" value="base_link" />
     <param name="odom_frame" value="base_link" />
     <param name="map_resolution" value="0.05"/>
-    <param name="map_size" value="1024"/>
+    <param name="map_size" value="256"/>
     <param name="map_start_x" value="0.5"/>
     <param name="map_start_y" value="0.5" />
     <param name="laser_z_min_value" value="-1.0" />

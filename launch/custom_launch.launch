@@ -16,9 +16,9 @@
 
 	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster"  args="0 0 0 0 0 0 /base_link /laser 100" />
 
-	<node name="navigToPoint" pkg="slam_project_buggy" type="navigToPoint.py"/>
+<!-- 	<node name="navigToPoint" pkg="slam_project_buggy" type="navigToPoint.py"/>
 
 	<rosparam file="$(find slam_project_buggy)/launchBuggy/footprint_robot.yaml" command="load" ns="/costmap/costmap" />
-
+ -->
 
 </launch>
