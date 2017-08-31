@@ -10,18 +10,21 @@ plugins: [
 ]
 
 publish_frequency: 1.0
+update_frequency: 1.0
+always_send_full_costmap: true
+
 
 footprint: [ [-0.20, 0.10], [-0.20, -0.10], [0.20, -0.10], [0.25, 0.0], [0.20, 0.10]]
-
 
 
 static_map:
   unknown_cost_value: -1
   lethal_cost_threshold: 100
   map_topic: /map
+  subscribe_to_updates: true
 
 inflation:
-  inflation_radius: 0.1
+  inflation_radius: 0.2
   cost_scaling_factor: 5
 
 

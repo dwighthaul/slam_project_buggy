@@ -3,20 +3,16 @@
 <launch>
 
 
-	<!-- <include file="$(find project_buggy)/launch/project_buggy.launch" /> -->
-
-
-
 	<include file="$(find slam_project_buggy)/launch/custom_launch.launch" />
+
 
 	<rosparam file="$(find slam_project_buggy)/launchBuggy/footprint_robot.yaml" command="load" ns="/costmap/costmap" />
 
-	<node pkg="costmap_2d" type="costmap_2d_node" name="costmap" output="screen" ></node>
-	
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam_project_buggy)/rviz/test_costmap.rviz" />
 
-	<!-- <node pkg="slam_project_buggy" type="pointToPointPath.py" name="pointToPointPath" output="screen" /> -->
+	<node pkg="costmap_2d" type="costmap_2d_node" name="costmap" output="screen"></node>
 
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam_project_buggy)/rviz/test_costmap.rviz"/>
 
 
 	<!-- <node pkg="slam_project_buggy" type="pointToPointPathSendOrders.py" name="pointToPointPathSendOrders" output="screen" ></node> -->
