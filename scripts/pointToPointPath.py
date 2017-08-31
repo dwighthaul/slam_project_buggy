@@ -40,7 +40,7 @@ class pointToPointPath():
 
     vectorRobotToPointselected = Vector3()
 
-    threshold = 30
+    threshold = 75
 
     def __init__(self):
         rospy.init_node('navig_to_end_point', anonymous=True)
