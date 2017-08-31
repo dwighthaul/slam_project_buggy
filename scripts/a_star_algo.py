@@ -146,12 +146,6 @@ class PathCreator(object):
 
     def fillWalls(self, wallList):
 
-
-        # for i in range(len(wallList)):
-
-        #     print(str(wallList[i]) + ",")
-
-
         for i in range(len(wallList)):
 
             x = wallList[i] / self.height
@@ -159,13 +153,6 @@ class PathCreator(object):
 
             self.map[y][x] = wallValue
 
-
-        # indice = 0
-        # for x in range(self.height):
-        #     for y in range(self.width):
-        #         if indice in wallList:
-        #             self.map[y][x] = wallValue
-        #         indice = indice +1
 
 
 
