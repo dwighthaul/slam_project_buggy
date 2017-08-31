@@ -52,12 +52,12 @@ class ptpSendOrder():
 
     def __init__(self):
 
+        self.navigToPoint = navigToPoint()
         rospy.init_node('navig_to_point', anonymous=True)
         rospy.Subscriber("list_point_path", ListPoints, self.callback_getlist_point, queue_size=1)
 
 
 
-        self.navigToPoint = navigToPoint()
 
 
 
