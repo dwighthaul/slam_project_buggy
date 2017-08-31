@@ -24,7 +24,7 @@ static_map:
   subscribe_to_updates: true
 
 inflation:
-  inflation_radius: 0.2
+  inflation_radius: 0.4
   cost_scaling_factor: 5
 
 
