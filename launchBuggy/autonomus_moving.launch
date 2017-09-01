@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<node name="publishDistanceAllSide" pkg="slam_project_buggy" type="publishDistanceAllSide.py"/>
+
+
+	<node name="action_client_setDirectionRobot" pkg="slam_project_buggy" type="action_client_setDirectionRobot.py" output="screen"/>
+
+
+</launch>
